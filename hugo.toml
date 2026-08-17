@@ -1,0 +1,43 @@
+baseURL = "https://openstack-continuous-integration.github.io/"
+title = "openstack-continuous-integration"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "404"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[params]
+  subtitle = "CI images and servers on OpenStack, built with Packer and Ansible"
+  description = "Building and provisioning continuous-integration infrastructure on OpenStack: Packer constructor code for images, Ansible provisioning for CI servers and GitHub Actions runner images, and a pkgx-pinned toolchain so every command runs at a known version."
+  tagline = "Continuous-integration infrastructure on <strong>OpenStack</strong> — images built with Packer, servers provisioned with Ansible."
+  pills = ["Packer", "Ansible", "OpenStack", "pkgx-pinned toolchain", "GitHub Actions runners"]
+  primary_role = "provisioning"
+  leads = [
+    "The split is deliberate: <strong>constructor</strong> repositories build an image, <strong>provisioner</strong> repositories describe what goes inside it. Either half is usable on its own, and they are meant to be paired.",
+    "The toolchain itself is pinned through <a href=\"https://docs.pkgx.sh/\">pkgx</a> — <code>task</code>, <code>ssh</code>, <code>packer</code>, <code>coreutils</code> — so a build runs the same versions on a laptop and on a runner instead of whatever the host happens to have."
+  ]
+  principles = "This is infrastructure code rather than a Go library org: the artefacts are images and provisioned servers, so the repositories are Ansible and Packer rather than modules."
+
+[[params.repos]]
+  name = "image_build"
+  role = "constructor"
+  reach = "HashiCorp Packer"
+  result = "<strong>Constructor</strong> code that builds an OpenStack image. Meant to be used together with a provisioner, not alone."
+[[params.repos]]
+  name = "ci_provisioner"
+  role = "provisioning"
+  reach = "Ansible"
+  result = "The Ansible code that provisions a <strong>CI server</strong> — usable with a Packer constructor to bake an image, or against a running machine."
+[[params.repos]]
+  name = "ga_provisioner"
+  role = "provisioning"
+  reach = "Ansible"
+  result = "The provisioner for <strong>GitHub Actions runner images</strong>."
+[[params.repos]]
+  name = "github-actions-runner-images"
+  role = "constructor"
+  result = "The runner images themselves."
+[[params.repos]]
+  name = "ubuntu-24.04"
+  role = "constructor"
+  reach = "pkgx-pinned task / ssh / packer / coreutils"
+  result = "The Ubuntu 24.04 base, with every command it invokes version-controlled through pkgx."
