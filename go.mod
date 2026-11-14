@@ -2,4 +2,4 @@ module github.com/openstack-continuous-integration/openstack-continuous-integrat
 
 go 1.27.4
 
-require github.com/go-fleettools/landingkit v0.22.0
+require github.com/go-fleettools/landingkit v0.28.0
