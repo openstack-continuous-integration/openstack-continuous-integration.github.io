@@ -42,10 +42,8 @@
     <div>
       <h1 class="head">{{ .Site.Title }}</h1>
       <p class="sub">{{ .Site.Params.tagline | safeHTML }}</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="https://github.com/{{ .Site.Title }}">{{ partial "icons/github.html" . }}GitHub</a>
-        <a class="btn btn-ghost" href="{{ . }}">{{ partial "icons/arrow-right.html" . }}{{ $.Site.Params.secondary_label }}</a>
-      </div>
+      {{/* [[params.cta]] in hugo.toml: the kit renders the row */}}
+      {{ partial "cta.html" . }}
       <div class="trust">{{ range .Site.Params.pills }}<span class="pill">{{ . }}</span>{{ end }}</div>
     </div>
     {{ partial "hero-carousel.html" . }}
